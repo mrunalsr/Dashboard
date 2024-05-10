@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 20px;
+            background: aliceblue url("https://clipground.com/images/img_tree-png-1.png") no-repeat right top fixed;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgb(194, 213, 230);
+            text-align-last: center;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: medium;
+            font-style: oblique;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        header {
+            text-align: center;
+            background-color: aliceblue;
+            padding: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: black;
+        }
+
+        label {
+            display: inline-block;
+            width: 30%;
+            margin: 10px 0 5px;
+            text-align: right;
+        }
+
+        input,
+        select {
+            width: 65%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"] {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: rgb(209, 232, 246);
+            color: rgb(1, 2, 3);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 70%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Fill this Registration Form</h1>
+
+    <div class="container">
+        <form id="registrationForm">
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" required>
+
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+
+            <label for="courses">Choose a Course :</label>
+            <select id="courses" name="courses">
+                <option value="HTML">HTML</option>
+                <option value="css">CSS</option>
+                <option value="javascript">JavaScript</option>
+            </select><br>
+
+            <input type="radio" id="male" name="gender" value="Male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female">
+            <label for="female">Female</label>
+
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" id="birthdate" name="birthdate">
+
+            <button type="button" onclick="displayFormData()">Submit</button>
+        </form>
+
+        <div id="displayData"></div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent the form from submitting
+          
+          // Get form values
+          var fname = document.getElementById('fname').value;
+          var lname = document.getElementById('lname').value;
+          var gender = document.querySelector('input[name="gender"]:checked').value;
+          var address = document.getElementById('address').value;
+          var prePlacement = document.getElementById('prePlacement').checked;
+          var logicBuilding = document.getElementById('logicBuilding').checked;
+          var pythonML = document.getElementById('pythonML').checked;
+          var angular = document.getElementById('angular').checked;
+          var email = document.getElementById('email').value;
+          var username = document.getElementById('username').value;
+          var password = document.getElementById('password').value;
+          
+          // Create an object to hold the user data
+          var userData = {
+            fname: fname,
+            lname: lname,
+            gender: gender,
+            address: address,
+            courses: {
+              prePlacement: prePlacement,
+              logicBuilding: logicBuilding,
+              pythonML: pythonML,
+              angular: angular
+            },
+            email: email,
+            username: username,
+            password: password
+          };
+          
+          // Push user data to localStorage
+          var users = JSON.parse(localStorage.getItem('users')) || [];
+          users.push(userData);
+          localStorage.setItem('users', JSON.stringify(users));
+          
+          // Redirect to a new page to display the data
+          window.location.href = 'Display.html';
+        });
+        </script>
+    
+</body>
+
+</html>
+
+
+
+
